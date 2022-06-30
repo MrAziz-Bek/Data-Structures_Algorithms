@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Array {
     private int[] items;
     private int count;
