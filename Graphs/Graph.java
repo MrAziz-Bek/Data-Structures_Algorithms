@@ -23,12 +23,12 @@ public class Graph {
     }
 
     private Map<String, Node> nodes = new HashMap<>();
-    private Map<Node, List<Node>> adjencyList = new HashMap<>();
+    private Map<Node, List<Node>> adjacencyList = new HashMap<>();
 
     public void addNode(String label) {
         var node = new Node(label);
         nodes.putIfAbsent(label, node);
-        adjencyList.putIfAbsent(node, new ArrayList<>());
+        adjacencyList.putIfAbsent(node, new ArrayList<>());
     }
 
     public void addEdge(String from, String to) {
@@ -40,12 +40,12 @@ public class Graph {
         if (toNode == null)
             throw new IllegalStateException();
 
-        adjencyList.get(fromNode).add(toNode);
+        adjacencyList.get(fromNode).add(toNode);
     }
 
     public void print() {
-        for (var source : adjencyList.keySet()) {
-            var targets = adjencyList.get(source);
+        for (var source : adjacencyList.keySet()) {
+            var targets = adjacencyList.get(source);
 
             if (!targets.isEmpty())
                 System.out.println(source + " is connected to " + targets);
@@ -57,10 +57,10 @@ public class Graph {
         if (node == null)
             return;
 
-        for (var n : adjencyList.keySet())
-            adjencyList.get(n).remove(node);
+        for (var n : adjacencyList.keySet())
+            adjacencyList.get(n).remove(node);
 
-        adjencyList.remove(node);
+        adjacencyList.remove(node);
         nodes.remove(node);
     }
 
@@ -71,7 +71,7 @@ public class Graph {
         if (fromNode == null || toNode == null)
             return;
 
-        adjencyList.get(fromNode).remove(toNode);
+        adjacencyList.get(fromNode).remove(toNode);
     }
 
     public void traverseDepthFirstRec(String root) {
@@ -86,7 +86,7 @@ public class Graph {
         System.out.println(root);
         visited.add(root);
 
-        for (var node : adjencyList.get(root))
+        for (var node : adjacencyList.get(root))
             if (!visited.contains(node))
                 traverseDepthFirstRec(node, visited);
     }
@@ -109,7 +109,7 @@ public class Graph {
             System.out.println(current);
             visited.add(current);
 
-            for (var neighbour : adjencyList.get(current))
+            for (var neighbour : adjacencyList.get(current))
                 if (!visited.contains(neighbour))
                     stack.push(neighbour);
         }
@@ -134,7 +134,7 @@ public class Graph {
             System.out.println(current);
             visited.add(current);
 
-            for (var neighbour : adjencyList.get(current))
+            for (var neighbour : adjacencyList.get(current))
                 if (!visited.contains(neighbour))
                     queue.add(neighbour);
         }
@@ -160,7 +160,7 @@ public class Graph {
 
         visited.add(node);
 
-        for (var neighbour : adjencyList.get(node))
+        for (var neighbour : adjacencyList.get(node))
             topologicalSort(neighbour, visited, stack);
 
         stack.push(node);
@@ -186,14 +186,14 @@ public class Graph {
         all.remove(node);
         visiting.add(node);
 
-        for (var neighbour : adjencyList.get(node)) {
+        for (var neighbour : adjacencyList.get(node)) {
             if (visited.contains(neighbour))
                 continue;
 
             if (visiting.contains(neighbour))
                 return true;
 
-            if(hasCycle(neighbour, all, visiting, visited))
+            if (hasCycle(neighbour, all, visiting, visited))
                 return true;
         }
 
