@@ -1,2 +1,2 @@
-# Cheat Sheets
-![](cheat-sheets.png)
+# Data-Structures Operations : Cheat Sheet
+![](cheat-sheet.png)
