@@ -1,3 +1,4 @@
+# Searching-Algorithms : Cheat-Sheet
 | Searching Algorithms | Time Complexity | Space Complexity |
 | -------------------- | --------------- | ---------------- |
 | Linear Search | O(n) | O(1) |
